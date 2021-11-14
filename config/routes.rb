@@ -1,3 +1,11 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace :api do
+    resources :series, only: [:index, :create] do
+      resources :samples, only: [:index, :create] do
+        collection do
+          get :peaks
+        end
+      end
+    end
+  end
 end
