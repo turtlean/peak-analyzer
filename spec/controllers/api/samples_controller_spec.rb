@@ -50,5 +50,15 @@ RSpec.describe Api::SamplesController, type: :controller do
       json_response = JSON.parse(response.body)
       assert json_response == [0,0,0,0,0,0,1,1,1,0,0,0,0]
     end
+
+    it "compute peaks within the specified window" do
+      values =  [6, 6, 6, 5, 0, 1, 1, 1, 6]
+      values.each { |v| Sample.create!({serie_id: serie.id, value: v}) }
+
+      get :peaks, params: {series_id: serie.id, threshold: 1.0, window: 5}
+
+      json_response = JSON.parse(response.body)
+      assert json_response == [0,0,0,0,1]
+    end
   end
 end
