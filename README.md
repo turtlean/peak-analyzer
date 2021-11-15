@@ -129,3 +129,8 @@ Will only analyze the subset of last 4 elements. In this case `[1.1, 0.8, 1.2, 1
 ```
 [0.0, 0.0, 1.0, 0.0]
 ```
+
+## TODO in next iterations:
+
+- Add adapter modules for physical instruments, so they don't have to deal with the server directly. Adapters would be in charge of creating `Series` for each device, receiving its samples, and pushing them into the proper `Serie`.
+- Add roles and authentication. Currently, authentication is skipped via `skip_before_action :verify_authenticity_token` in the `ApplicationController`. However, roles and authentication are mandatory to make our API safe and easy to manage. OAuth2 is a good alternative regarding `auth`.
