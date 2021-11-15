@@ -8,4 +8,5 @@ Rails.application.routes.draw do
       end
     end
   end
+  root :to => redirect('/api/series')
 end

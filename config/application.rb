@@ -11,6 +11,11 @@ module PeakAnalyzer
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
     config.autoload_paths += ["#{Rails.root}/app/services"]
+
+    initializer(:remove_action_mailbox_and_activestorage_routes, after: :add_routing_paths) { |app|
+      app.routes_reloader.paths.delete_if {|path| path =~ /activestorage/}
+      app.routes_reloader.paths.delete_if {|path| path =~ /actionmailbox/ }
+    }
     # config.autoload_paths += ["#{config.root}/app/queries/"]
 
     # Configuration for the application, engines, and railties goes here.
